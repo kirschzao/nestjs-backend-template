@@ -24,11 +24,7 @@ export interface UserWithAccountInformationsResponse {
   phone: string | null;
   createdAt: Date;
   role: RoleEnum;
-  signatureStartDate: Date | null;
-  signatureEndDate: Date | null;
-  currentSignatureId: string | null;
   accountStatus: AccountStatus;
-  storageUsedInBytes: number;
   accountTier: AccountTier;
 }
 

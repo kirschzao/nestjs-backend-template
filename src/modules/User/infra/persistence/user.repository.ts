@@ -26,9 +26,6 @@ export class PrismaUserRepository implements UserRepository {
           ...userToPersiste,
           account: {
             create: {
-              tokensUsed: 0,
-              meetingSecondsUsed: 0,
-              storageUsedInBytes: 0,
               status: 'ACTIVE',
               tier: 'FREE',
             },
@@ -97,11 +94,7 @@ export class PrismaUserRepository implements UserRepository {
       phone: userWithAccount.phone,
       createdAt: userWithAccount.createdAt,
       role: userWithAccount.role as RoleEnum,
-      signatureStartDate: account.signatureStartDate,
-      signatureEndDate: account.signatureEndDate,
-      currentSignatureId: account.currentSignatureId,
       accountStatus: account.status,
-      storageUsedInBytes: account.storageUsedInBytes,
       accountTier: account.tier,
     };
   }

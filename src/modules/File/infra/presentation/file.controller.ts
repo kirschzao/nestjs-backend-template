@@ -24,15 +24,12 @@ import {
   GetFileByIdDecorator,
   UpdateFileDecorator,
   DeleteFileDecorator,
-  GetFileByIdN8NDecorator,
 } from '@/modules/File/application/dtos/file.decorators';
 import { CreateFileService } from '@/modules/File/application/services/create-file.service';
 import { UpdateFileService } from '@/modules/File/application/services/update-file.service';
 import { DeleteFileService } from '@/modules/File/application/services/delete-file.service';
 import { GetFileByIdService } from '@/modules/File/application/services/get-file-by-id.service';
 import { GetFilesByAuthorIdService } from '@/modules/File/application/services/get-file-by-author-id.service';
-import { Public } from '@/global/common/decorators/public.decorator';
-import { N8nGuard } from '@/global/common/guards/n8n.guard';
 
 @ApiTags('File')
 @UseGuards(JwtAuthGuard)
@@ -74,14 +71,6 @@ export class FileController {
   @Get(':id')
   async getFileById(@Param('id') id: string, @GetUser() user) {
     return await this.GetFileByIdService.execute(id, String(user.id));
-  }
-
-  @UseGuards(N8nGuard)
-  @Public()
-  @GetFileByIdN8NDecorator
-  @Get('n8n/:id')
-  async getFileByIdN8N(@Param('id') id: string, @Query('userId') userId: string) {
-    return await this.GetFileByIdService.execute(id, userId);
   }
 
   @GetFileByAuthorIdDecorator

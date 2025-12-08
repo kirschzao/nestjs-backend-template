@@ -5,7 +5,7 @@ import { IsEnum, IsNumberString, IsOptional, IsString, Length } from 'class-vali
 export class UpdateUserDTO {
   @ApiProperty({
     description: 'User name',
-    example: 'Erick Carpes',
+    example: 'Guilherme Cassol',
     required: false,
   })
   @IsOptional()

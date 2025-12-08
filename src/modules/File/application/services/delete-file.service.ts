@@ -14,7 +14,6 @@ export class DeleteFileService {
     private readonly BucketAdapter: BucketAdapter,
     private readonly Exception: ExceptionsAdapter,
     private readonly LoggerAdapter: LoggerAdapter,
-    private readonly AccountRepository: AccountRepository,
     private readonly TransactionAdapter: TransactionAdapter,
   ) {}
 
@@ -41,7 +40,6 @@ export class DeleteFileService {
     }
 
     return this.TransactionAdapter.transaction(async () => {
-      await this.AccountRepository.updateStorageUsedInBytes(authorId, -file.size);
       try {
         await this.BucketAdapter.deleteFile(file.fileUrl);
       } catch (error) {

@@ -9,7 +9,6 @@ export abstract class FileRepository {
   abstract getFileByFileUrl(fileUrl: string): Promise<File | null>;
   abstract getFilesByAuthorId(authorId: string): Promise<File[]>;
   abstract getFilesByAuthorIdInKnowledge(authorId: string): Promise<File[]>;
-  abstract getFilesByMessageId(messageId: string): Promise<File[]>;
   abstract updateFile(file: FileInterface, id: string): Promise<File>;
   abstract deleteFile(id: string): Promise<void | boolean>;
 }

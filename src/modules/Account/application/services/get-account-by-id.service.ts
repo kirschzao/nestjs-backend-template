@@ -19,11 +19,6 @@ export class GetAccountByIdService {
       });
     }
 
-    if (findAccount.signatureEndDate && findAccount.signatureEndDate < new Date()) {
-      await this.AccountRepository.updateAccountTier(accountId, 'FREE');
-      await this.AccountRepository.updateAccountStatus(accountId, 'EXPIRED');
-    }
-
     return findAccount;
   }
 }

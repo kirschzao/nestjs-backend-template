@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:15
-    container_name: postgres-nest
+    container_name: oryzalabs-db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin

@@ -5,30 +5,6 @@ import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateAccountDTO {
   @ApiProperty({
-    description: 'Signature start date',
-    example: '2024-01-01T00:00:00.000Z',
-    required: false,
-  })
-  @IsOptional()
-  signatureStartDate: Date | null;
-
-  @ApiProperty({
-    description: 'Signature end date',
-    example: '2024-12-31T23:59:59.000Z',
-    required: false,
-  })
-  @IsOptional()
-  signatureEndDate: Date | null;
-
-  @ApiProperty({
-    description: 'Current signature ID',
-    example: 'sig_1234567890',
-    required: false,
-  })
-  @IsOptional()
-  currentSignatureId: string | null;
-
-  @ApiProperty({
     description: 'Account status',
     example: 'Active',
   })

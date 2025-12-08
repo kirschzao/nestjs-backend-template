@@ -59,24 +59,7 @@ export const GetAccountDecorator = applyDecorators(
 );
 
 
-export const GetAccountCurrentSignatureDecorator = applyDecorators(
-  ApiOperation({
-    summary: 'Get current signature by account ID',
-    description:
-      'This endpoint retrieves the current signature associated with an account by its ID.',
-  }),
-  ApiOkResponse({
-    description: 'Current signature retrieved successfully.',
-  }),
-  ApiNotFoundResponse({
-    description:
-      'Account or signature not found. The account with the specified ID does not exist or has no current signature.',
-  }),
-  ApiInternalServerErrorResponse({
-    description:
-      'Internal server error. An unexpected error occurred while processing the request.',
-  }),
-);
+
 
 export const DeleteAccountDecorator = applyDecorators(
   ApiOperation({

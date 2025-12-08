@@ -6,3 +6,114 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model User{
+  id                  String               @id @default(uuid())
+  name                String
+  email               String               @unique
+  password            String
+  cpf                 String?              @unique @db.Char(11)
+  phone               String?              @unique 
+  createdAt           DateTime             @default(now()) @map("created_at")
+  role                RoleEnum             @default(USER)
+  account             Account?             @relation
+  files               File[]               @relation("UserFiles")
+  verifyPhoneTokens   VerifyPhoneToken[]
+
+  @@map("users")
+}
+
+
+model Account{
+  id                   String               @id
+  status               AccountStatus        @default(ACTIVE)
+  tier                 AccountTier          @default(FREE)
+  user                 User                 @relation(fields: [id], references: [id], onDelete: Cascade)
+  refreshTokens        RefreshToken[]
+  resetPasswordTokens  ResetPasswordToken[]
+  @@map("accounts")
+}
+model File {
+  id           String        @id @default(uuid())
+  name         String
+  size         Int
+  type         String
+  fileUrl      String        @unique @map("file_url")
+  authorId     String        @map("author_id")
+  createdAt    DateTime      @default(now()) @map("created_at")
+  deletedAt    DateTime?     @map("deleted_at")
+  deleted      Boolean       @default(false)
+  author       User          @relation("UserFiles", fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("files")
+}
+
+model RefreshToken {
+  id        String       @id @default(uuid()) 
+  token     String       @unique
+  accountId String       @map("account_id")
+  createdAt DateTime     @default(now()) @map("created_at")
+  expiresAt DateTime     @map("expires_at")
+  isRevoked Boolean      @default(false) @map("is_revoked")
+  account   Account      @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("refresh_tokens")
+}
+
+model Token2FA {
+  id           String   @id @default(uuid())
+  token        String   
+  expiresAt    DateTime @map("expires_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+  isRevoked    Boolean  @default(false) @map("is_revoked")
+  userEmail    String   @map("user_email")
+  userName     String?  @map("user_name")
+  userPassword String?  @map("usage_password")
+  
+  @@map("token2fa")
+}
+
+model ResetPasswordToken {
+  id          String      @id @default(uuid())
+  token       String      
+  expiresAt   DateTime    @map("expires_at")
+  createdAt   DateTime    @default(now()) @map("created_at")
+  isRevoked   Boolean     @default(false) @map("is_revoked")
+  accountId   String      @map("account_id")
+  account     Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@map("reset_password_tokens")
+}
+
+model VerifyPhoneToken {
+  id        String    @id @default(uuid())
+  token     String    
+  userId    String    @map("user_id")
+  createdAt DateTime  @default(now()) @map("created_at")
+  expiresAt DateTime  @map("expires_at")
+  isRevoked Boolean   @default(false) @map("is_revoked")
+  phone     String    @map("phone")
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("verify_phone_tokens")
+}
+
+enum RoleEnum {
+  ADMIN
+  USER
+}
+
+enum AccountStatus {
+  ACTIVE
+  INACTIVE
+  EXPIRED
+  REVOKED
+  @@map("account_status")
+}
+
+enum AccountTier {
+  FREE
+  PAYMENT
+  @@map("account_tier")
+}

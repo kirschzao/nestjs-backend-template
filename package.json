@@ -2,9 +2,20 @@
   "name": "oryza-nestjs-template",
   "version": "1.0.0",
   "description": "Template para aplicações backend Nestjs da Oryzalabs",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "start": "nest start",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "repository": {
     "type": "git",
@@ -19,7 +30,9 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.946.0",
     "@aws-sdk/client-ses": "^3.946.0",
+    "@aws-sdk/lib-storage": "^3.946.0",
     "@aws-sdk/s3-request-presigner": "^3.946.0",
+    "@eslint/eslintrc": "^3.3.3",
     "@nestjs/bullmq": "^11.0.4",
     "@nestjs/common": "^11.1.9",
     "@nestjs/config": "^4.0.2",
@@ -32,18 +45,25 @@
     "@nestjs/throttler": "^6.5.0",
     "@nestjs/websockets": "^11.1.9",
     "@paralleldrive/cuid2": "^3.0.4",
-    "@prisma/client": "^7.1.0",
+    "@prisma/client": "^6.16.1",
     "@scalar/nestjs-api-reference": "^1.0.9",
     "@types/multer": "^2.0.0",
+    "@types/express": "^5.0.0",
     "bcryptjs": "^3.0.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.3",
     "cookie-parser": "^1.4.7",
     "cpf-cnpj-validator": "^1.0.3",
-    "express": "npm:Express@^3.0.1",
-    "Express": "^3.0.1",
+    "dotenv": "^17.2.3",
     "multer": "^2.0.2",
+    "passport-jwt": "^4.0.1",
+    "pg": "^8.16.3",
+    "prisma": "^6.16.1",
     "socket.io": "^4.8.1",
     "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/pg": "^8.15.6"
   }
 }

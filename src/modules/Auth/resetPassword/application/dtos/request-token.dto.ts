@@ -10,7 +10,7 @@ import {
 export class ResetPasswordRequestDTO {
   @ApiProperty({
     description: 'User email',
-    example: 'erickcarpes@gmail.com',
+    example: 'guilhermecassol@gmail.com',
     required: true,
   })
   @IsEmail()

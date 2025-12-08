@@ -17,7 +17,6 @@ export class CreateFileService {
     private readonly UserRepository: UserRepository,
     private readonly BucketAdapter: BucketAdapter,
     private readonly Exception: ExceptionsAdapter,
-    private readonly AccountRepository: AccountRepository,
     private readonly TransactionAdapter: TransactionAdapter,
     private readonly LoggerAdapter: LoggerAdapter,
   ) {}
@@ -62,8 +61,6 @@ export class CreateFileService {
             internalKey: FileExceptions.FILE_UPLOAD_FAILED,
           });
         }
-        await this.AccountRepository.updateStorageUsedInBytes(authorId, fileDto.size * 1024);
-
         createdFile.fileUrl = this.BucketAdapter.getSignedUrlForInternalRead(createdFile.fileUrl);
 
         return createdFile;

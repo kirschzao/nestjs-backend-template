@@ -3,7 +3,6 @@ import { FileController } from '@/modules/File/infra/presentation/file.controlle
 import { CreateFileService } from '@/modules/File//application/services/create-file.service';
 import { GetFileByIdService } from '@/modules/File//application/services/get-file-by-id.service';
 import { GetFilesByAuthorIdService } from '@/modules/File//application/services/get-file-by-author-id.service';
-import { GetFileInKnowledgeService } from '@/modules/File//application/services/get-file-in-knowledge.service';
 import { UpdateFileService } from '@/modules/File//application/services/update-file.service';
 import { DeleteFileService } from '@/modules/File//application/services/delete-file.service';
 
@@ -14,7 +13,6 @@ import { DeleteFileService } from '@/modules/File//application/services/delete-f
     CreateFileService,
     GetFileByIdService,
     GetFilesByAuthorIdService,
-    GetFileInKnowledgeService,
     UpdateFileService,
     DeleteFileService,
   ],

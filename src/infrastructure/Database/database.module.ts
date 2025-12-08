@@ -6,10 +6,7 @@ import { PrismaService } from '@/infrastructure/Database/prisma.service';
 import { PrismaRefreshTokenRepository } from '@/modules/Auth/login/infra/persistence/refresh-token.repository';
 import { FileRepository } from '@/modules/File/domain/file.repository';
 import { PrismaFileRepository } from '@/modules/File/infra/persistence/file.repository';
-import { ChatRepository } from '@/modules/Chat/domain/chat.repository';
 import { BucketModule } from '../Bucket/bucket.module';
-import { OnboardingRepository } from '@/modules/Onboarding/domain/onboarding.repository';
-import { PrismaOnboardingRepository } from '@/modules/Onboarding/infra/persistence/onboarding';
 import { Token2FARepository } from '@/modules/Auth/signup/domain/2fa-token.repository';
 import { PrismaToken2FaRepository } from '@/modules/Auth/signup/infra/persistence/2fa-token.repository';
 import { ResetPasswordTokenRepository } from '@/modules/Auth/resetPassword/domain/reset-password-token.repository';
@@ -23,7 +20,7 @@ import { PrismaVerifyPhoneRepository } from '@/modules/Auth/verifyPhone/infra/pe
 
 @Global()
 @Module({
-  imports: [BucketModule],
+  imports: [],
   controllers: [],
   providers: [
     PrismaService,
@@ -38,10 +35,6 @@ import { PrismaVerifyPhoneRepository } from '@/modules/Auth/verifyPhone/infra/pe
     {
       provide: RefreshTokenRepository,
       useClass: PrismaRefreshTokenRepository,
-    },
-    {
-      provide: OnboardingRepository,
-      useClass: PrismaOnboardingRepository,
     },
     {
       provide: Token2FARepository,
@@ -65,16 +58,15 @@ import { PrismaVerifyPhoneRepository } from '@/modules/Auth/verifyPhone/infra/pe
     },
   ],
   exports: [
+    AccountRepository,
     UserRepository,
     RefreshTokenRepository,
     FileRepository,
-    ChatRepository,
-    OnboardingRepository,
     Token2FARepository,
     ResetPasswordTokenRepository,
+    VerifyPhoneRepository,
     TransactionAdapter,
     PrismaService,
-
   ],
 })
-export class DatabaseModule {}
+export class DatabaseModule{}

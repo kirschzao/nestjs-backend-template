@@ -54,8 +54,8 @@ async function bootstrap() {
 
   if (!isProduction) {
     const config = new DocumentBuilder()
-      .setTitle('NOME DO PROJETO - Backend')
-      .setDescription('Essa API descreve as operações do sistema do Backend do NOME DO PROJETO.')
+      .setTitle('Template - Backend')
+      .setDescription('Essa API descreve as operações do sistema do Backend Template.')
       .setVersion('1.0')
       .addSecurity('bearerAuth', {
         type: 'http',
@@ -91,7 +91,7 @@ async function bootstrap() {
 
   console.info(`Server is running on http://localhost:${process.env.PORT ?? 3000}`);
   console.info(
-    `Scalar(OpenAPI) is running on http://localhost:${process.env.PORT || 3000}/docs and`,
+    `Scalar(OpenAPI) is running on http://localhost:${process.env.PORT || 3000}/docs`,
   );
   console.info(`Prisma Studio is running on http://localhost:${process.env.PORT || 5555}`);
 

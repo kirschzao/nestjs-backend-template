@@ -10,7 +10,7 @@ import {
 export class SignupRequestDTO {
   @ApiProperty({
     description: 'User email',
-    example: 'erickcarpes@gmail.com',
+    example: 'guilhermecassol@gmail.com',
     required: true,
   })
   @IsEmail()
@@ -20,7 +20,7 @@ export class SignupRequestDTO {
 
   @ApiProperty({
     description: 'User name',
-    example: 'Erick Carpes',
+    example: 'Guilherme Cassol',
     required: true,
   })
   @IsString()
@@ -29,7 +29,7 @@ export class SignupRequestDTO {
 
   @ApiProperty({
     description: 'User password',
-    example: 'ErickCarpes123*',
+    example: 'Cassolzinho123',
     required: true,
   })
   @IsString()

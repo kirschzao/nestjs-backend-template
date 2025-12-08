@@ -16,7 +16,7 @@ async function bootstrap() {
   app.use(
     express.json({
       limit: '150mb',
-      verify: (req: any, _res, buf) => {
+      verify: (req: express.Request & { rawBody: Buffer }, _res, buf) => {
         req.rawBody = buf;
       },
     }),
@@ -40,6 +40,7 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
+  //eslint-disable-next-line @typescript-eslint/no-unsafe-call
   app.use(cookieParser());
 
   app.useGlobalPipes(

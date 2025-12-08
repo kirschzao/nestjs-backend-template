@@ -4,7 +4,6 @@ import { BucketAdapter } from '@/infrastructure/Bucket/bucket.adapter';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { FileExceptions, UserExceptions } from '@/infrastructure/Exceptions/exceptions.types';
 import { TransactionAdapter } from '@/infrastructure/Database/Transaction/transaction.adapter';
-import { AccountRepository } from '@/modules/Account/domain/account.repository';
 import { LoggerAdapter } from '@/infrastructure/Logger/logger.adapter';
 
 @Injectable()

@@ -65,7 +65,7 @@ export class CreateFileDTO {
     example: 34000,
     required: true,
   })
-  @Transform(({ value }) => parseInt(value, 10))
+  @Transform(({ value }) => parseInt(value as string, 10))
   @IsNumber()
   @IsNotEmpty()
   size: number;

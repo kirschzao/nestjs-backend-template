@@ -27,7 +27,10 @@ export class SendEmailHelperIntegration {
 
     this.senderEmail = `"${senderName}" <${senderEmail}>`;
 
-    const sesClientConfig: any = {
+    const sesClientConfig: {
+      region: string;
+      credentials: { accessKeyId: string; secretAccessKey: string };
+    } = {
       region: region,
       credentials: {
         accessKeyId: accessKeyId,

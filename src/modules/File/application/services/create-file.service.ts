@@ -7,7 +7,6 @@ import { UserRepository } from '@/modules/User/domain/user.repository';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { UserExceptions, FileExceptions } from '@/infrastructure/Exceptions/exceptions.types';
 import { TransactionAdapter } from '@/infrastructure/Database/Transaction/transaction.adapter';
-import { AccountRepository } from '@/modules/Account/domain/account.repository';
 import { LoggerAdapter } from '@/infrastructure/Logger/logger.adapter';
 
 @Injectable()

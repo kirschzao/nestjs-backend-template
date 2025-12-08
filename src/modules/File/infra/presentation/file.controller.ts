@@ -9,7 +9,6 @@ import {
   UseInterceptors,
   UploadedFiles,
   UseGuards,
-  Query,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { FilesInterceptor } from '@nestjs/platform-express';
@@ -19,7 +18,6 @@ import { UpdateFileDTO } from '@/modules/File/application/dtos/update-file.dto';
 import { ConvertToCreateFileDTO } from '@/modules/File/application/dtos/create-file.dto';
 import {
   CreateFileDecorator,
-  CreateFileKnowledgeDecorator,
   GetFileByAuthorIdDecorator,
   GetFileByIdDecorator,
   UpdateFileDecorator,

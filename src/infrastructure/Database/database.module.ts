@@ -6,7 +6,6 @@ import { PrismaService } from '@/infrastructure/Database/prisma.service';
 import { PrismaRefreshTokenRepository } from '@/modules/Auth/login/infra/persistence/refresh-token.repository';
 import { FileRepository } from '@/modules/File/domain/file.repository';
 import { PrismaFileRepository } from '@/modules/File/infra/persistence/file.repository';
-import { BucketModule } from '../Bucket/bucket.module';
 import { Token2FARepository } from '@/modules/Auth/signup/domain/2fa-token.repository';
 import { PrismaToken2FaRepository } from '@/modules/Auth/signup/infra/persistence/2fa-token.repository';
 import { ResetPasswordTokenRepository } from '@/modules/Auth/resetPassword/domain/reset-password-token.repository';

@@ -30,21 +30,29 @@ export class BucketHelperIntegration {
     this.bucketRegion = region;
     this.fileDomainPrefix = fileDomainPrefix;
 
-    const s3ClientConfig: any = {
-      region: region,
-      credentials: {
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey,
-      },
-      forcePathStyle: true,
-    };
-
     if (endpoint) {
       this.bucketEndpoint = endpoint;
-      s3ClientConfig.endpoint = endpoint;
+      const s3ClientConfig = {
+        endpoint: endpoint,
+        region: region,
+        credentials: {
+          accessKeyId: accessKeyId,
+          secretAccessKey: secretAccessKey,
+        },
+        forcePathStyle: true,
+      };
+      this.s3Client = new S3Client(s3ClientConfig);
+    } else {
+      const s3ClientConfig = {
+        region: region,
+        credentials: {
+          accessKeyId: accessKeyId,
+          secretAccessKey: secretAccessKey,
+        },
+        forcePathStyle: true,
+      };
+      this.s3Client = new S3Client(s3ClientConfig);
     }
-
-    this.s3Client = new S3Client(s3ClientConfig);
   }
 
   getFileKey(fileUrl: string): string {

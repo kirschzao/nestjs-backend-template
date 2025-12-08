@@ -1,0 +1,19 @@
+{
+  "name": "oryza-nestjs-template",
+  "version": "1.0.0",
+  "description": "Template para aplicações backend Nestjs da Oryzalabs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Oryza-Labs/oryza-nestjs-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Oryza-Labs/oryza-nestjs-template/issues"
+  },
+  "homepage": "https://github.com/Oryza-Labs/oryza-nestjs-template#readme"
+}

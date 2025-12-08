@@ -1,0 +1,46 @@
+services:
+  api:
+    image: MUDAR_PARA_O_ECR:${IMAGE_TAG} # <-- ATUALIZE AQUI
+    container_name: oryzalabs-api
+    restart: unless-stopped
+    env_file:
+      - .env.stage
+    networks:
+      - oryzalabs-network
+    command: sh -c "npx prisma migrate deploy && npm run start:prod"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    env_file:
+      - .env.stage
+    networks:
+      - oryzalabs-network
+    volumes:
+      - redis-data:/data
+
+  nginx:
+    image: nginx:latest
+    container_name: oryzalabs-nginx
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx/certbot:/var/www/certbot
+      - ./nginx/stage:/etc/nginx/conf.d
+      - ./nginx/stage/ssl:/etc/nginx/stage/ssl
+    depends_on:
+      - api
+    networks:
+      - oryzalabs-network
+
+networks:
+  oryzalabs-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local

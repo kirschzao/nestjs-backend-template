@@ -1,16 +1,16 @@
 # Regra geral para todos os arquivos na pasta 'src'
 
-/src @kirschzao @Thom-Mundstock
+/src @kirschzao +COLOCAR_OS_PARTICIPANTS_AQUI
 
 # Arquivos de configuração de workflows do GitHub Actions
 
-\*.yml @kirschzao
-.github/ @kirschzao
+\*.yml @kirschzao +COLOCAR_OS_PARTICIPANTS_AQUI
+.github/ @kirschzao +COLOCAR_OS_PARTICIPANTS_AQUI
 
 # Arquivos relacionados ao Prisma (esquema do banco de dados, etc.)
 
-/prisma @kirschzao @Thom-Mundstock
+/prisma @kirschzao +COLOCAR_OS_PARTICIPANTS_AQUI
 
 # Arquivos JSON
 
-\*.json @kirschzao
+\*.json @kirschzao +COLOCAR_OS_PARTICIPANTS_AQUI

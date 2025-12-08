@@ -34,6 +34,7 @@ export class GenerateSignedCookiesService extends CloudfrontHelperIntegration {
       ],
     };
 
+    
     const policyString = JSON.stringify(policy);
     const policyBase64 = Buffer.from(policyString).toString('base64');
     const cloudFrontPolicy = this.encodeToCloudFrontFormat(policyBase64);

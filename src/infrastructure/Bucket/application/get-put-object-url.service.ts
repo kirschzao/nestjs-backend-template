@@ -20,7 +20,6 @@ export class GetPutObjectUrlService extends BucketHelperIntegration {
   async execute(
     fileKey: string,
     contentType: string,
-    meetingId: string,
     userId: string,
     expiresIn: number = 3600,
   ): Promise<string> {
@@ -37,7 +36,6 @@ export class GetPutObjectUrlService extends BucketHelperIntegration {
         Key: fileKey,
         ContentType: contentType,
         Metadata: {
-          meetingId: meetingId,
           authorId: userId,
         },
       });
@@ -49,7 +47,7 @@ export class GetPutObjectUrlService extends BucketHelperIntegration {
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'GetPutObjectUrlService',
-        message: `Error generating presigned URL for key: ${fileKey}, meetingId: ${meetingId}, userId: ${userId}. Error: ${error}`,
+        message: `Error generating presigned URL for key: ${fileKey}, userId: ${userId}. Error: ${error}`,
       });
       this.exceptionsAdapter.internalServerError({
         message: 'Error generating upload presigned URL.',

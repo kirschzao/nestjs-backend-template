@@ -21,7 +21,7 @@ export class LoginRequestDTO {
 
   @ApiProperty({
     description: 'User password',
-    example: 'GuilhermeCassol123*',
+    example: 'Cassolzinho123',
     required: true,
   })
   @IsString()

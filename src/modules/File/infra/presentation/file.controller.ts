@@ -54,18 +54,6 @@ export class FileController {
     return await Promise.all(creationPromises);
   }
 
-  @CreateFileKnowledgeDecorator
-  @UseInterceptors(
-    FilesInterceptor('files', 10, { limits: { fileSize: 1024 * 1024 * 1024 } }),
-  )
-  @Post('knowledge')
-  async createInKnowledge(@UploadedFiles() files: Array<Express.Multer.File>, @GetUser() user) {
-    const creationPromises = files.map((file) => {
-      const fileDTO = ConvertToCreateFileDTO(file);
-      return this.CreateFileService.execute(fileDTO, String(user.id));
-    });
-    return await Promise.all(creationPromises);
-  }
 
   @GetFileByIdDecorator
   @Get(':id')

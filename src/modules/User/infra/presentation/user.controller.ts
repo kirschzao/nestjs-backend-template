@@ -9,6 +9,7 @@ import { GetUserWithAccountService } from '@/modules/User/application/services/g
 import { GetUserByIdService } from '@/modules/User/application/services/get-user.service';
 import { CreateUserDTO } from '@/modules/User/application/dtos/create-user.dto';
 import { UpdateUserDTO } from '@/modules/User/application/dtos/update-user.dto';
+import { Public } from '@/global/common/decorators/public.decorator';
 import { GetUser } from '@/global/common/decorators/get-user.decorator';
 import {
   CreateUserDecorator,
@@ -37,7 +38,8 @@ export class UserController {
   ) {}
 
   @CreateUserDecorator
-  @IsAdmin()
+  //@IsAdmin()
+  @Public()
   @Post()
   async createUser(@Body() user: CreateUserDTO) {
     return await this.CreateUserService.execute(user);

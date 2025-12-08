@@ -10,7 +10,6 @@ export abstract class BucketAdapter {
   abstract getSignedUrlForUpload(
     fileKey: string,
     contentType: string,
-    meetingId?: string,
     userId?: string,
     expiresIn?: number,
   ): Promise<string>;

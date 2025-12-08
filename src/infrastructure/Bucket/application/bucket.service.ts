@@ -41,11 +41,10 @@ export class BucketService implements BucketAdapter {
   async getSignedUrlForUpload(
     fileKey: string,
     contentType: string,
-    meetingId: string,
     userId: string,
     expiresIn?: number,
   ): Promise<string> {
-    return this.GetPutObjectUrlService.execute(fileKey, contentType, meetingId, userId, expiresIn);
+    return this.GetPutObjectUrlService.execute(fileKey, contentType, userId, expiresIn);
   }
 
   getFileKey(fileUrl: string): string {

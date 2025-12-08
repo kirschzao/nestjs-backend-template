@@ -1,0 +1,72 @@
+name: Deploy to EC2 on prod push (using ECR)
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  ECR_REPO: ${{ secrets.ECR_REPOSITORY_URI }}
+
+jobs:
+  Promote-Image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar credenciais AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_PUSHER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_PUSHER_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+
+      - name: Login no Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Promover Imagem de Stage para Prod
+        run: |
+          echo "📥 Baixando imagem do Stage..."
+          docker pull $ECR_REPO:stage-latest
+
+          echo "🏷️ Retagueando para: ${{ github.sha }}"
+          docker tag $ECR_REPO:stage-latest $ECR_REPO:${{ github.sha }}
+
+          echo "🚀 Enviando imagem de Prod..."
+          docker push $ECR_REPO:${{ github.sha }}
+
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    needs: Promote-Image
+    steps:
+      - name: Connect, Pull, and Deploy on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Navegando para o diretório..."
+            cd ~/PASTA_DO_PROJETO_NO_SERVIDOR
+
+            echo "Atualizando repo..."
+            git pull origin main
+
+            echo "Logando no ECR..."
+            aws ecr get-login-password --region REGIAO_AWS | docker login --username AWS --password-stdin ECR_REPO
+
+            # Agora sim, o hash da main existe no ECR!
+            export IMAGE_TAG=${{ github.sha }}
+
+            echo "Puxando imagem..."
+            IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose-prod.yml pull
+
+            echo "Subindo..."
+            IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose-prod.yml up -d
+
+            docker system prune -f

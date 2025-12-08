@@ -6,7 +6,6 @@ import { GetSignedUrlForInternalReadService } from './get-signed-url-internal.se
 import { UploadFileService } from './upload-file.service';
 import { UploadFileFromUrlService } from './upload-file-from-url.service';
 import { GetPutObjectUrlService } from './get-put-object-url.service';
-import * as Express from 'express';
 
 @Injectable()
 export class BucketService implements BucketAdapter {

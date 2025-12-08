@@ -1,4 +1,3 @@
-import * as Express from 'express';
 
 export abstract class BucketAdapter {
   abstract uploadFile(file: Express.Multer.File, fileKey: string): Promise<string | undefined>;

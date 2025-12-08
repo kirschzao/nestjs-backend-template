@@ -1,0 +1,16 @@
+# Regra geral para todos os arquivos na pasta 'src'
+
+/src @kirschzao @Thom-Mundstock
+
+# Arquivos de configuração de workflows do GitHub Actions
+
+\*.yml @kirschzao
+.github/ @kirschzao
+
+# Arquivos relacionados ao Prisma (esquema do banco de dados, etc.)
+
+/prisma @kirschzao @Thom-Mundstock
+
+# Arquivos JSON
+
+\*.json @kirschzao

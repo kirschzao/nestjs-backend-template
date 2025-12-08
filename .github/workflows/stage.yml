@@ -1,0 +1,105 @@
+name: Deploy to EC2 on stage push (using ECR)
+
+on:
+  push:
+    branches:
+      - stage
+
+env:
+  ECR_IMAGE: ${{ secrets.ECR_REPOSITORY_URI }}:${{ github.sha }}
+
+jobs:
+  Padronize:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [24.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run format
+      - run: npm run lint
+      # - run: npm run test
+      - run: npm run build
+
+  Build:
+    runs-on: ubuntu-latest
+    needs: Padronize
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar credenciais AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.ECR_PUSHER_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ECR_PUSHER_SECRET_ACCESS_KEY }}
+          aws-region: us-west-1
+
+      - name: Login no Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build, Tag e Push da Imagem para o ECR
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ env.ECR_IMAGE }}
+            ${{ secrets.STAGE_ECR_REPOSITORY_URI }}:stage-latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: Build
+
+    steps:
+      - name: Connect, Pull, and Deploy on EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.STAGE_EC2_HOST }}
+          username: ${{ secrets.STAGE_EC2_USERNAME }}
+          key: ${{ secrets.STAGE_EC2_SSH_KEY }}
+          script: |
+            echo "Navegando para o diretório ~/Projeto..."
+            cd ~/PASTA_DO_PROJETO_NO_SERVIDOR
+
+            echo "Atualizando o repositório (para pegar o novo docker-compose.yml)..."
+            git pull origin stage
+
+            # Exporta a tag da imagem que acabamos de buildar no Job 1
+            export IMAGE_TAG=${{ github.sha }}
+
+            echo "Realizando login no ECR..."
+            aws ecr get-login-password --region us-west-1 \
+              | docker login --username AWS --password-stdin ${{ secrets.ECR_REPOSITORY_URI }}
+
+            echo "Baixando (pull) a nova imagem do ECR..."
+            # NÃO PRECISA DE LOGIN! A IAM Role da EC2 trata disso.
+            # O 'pull' só baixa, não consome RAM de build
+            echo "Puxando imagem mais recente..."
+            IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose-stage.yml pull
+
+            echo "Subindo containers..."
+            IMAGE_TAG=${{ github.sha }} docker compose -f docker-compose-stage.yml up -d
+
+            echo "Limpando sistemas Docker antigos..."
+            docker system prune -f
+
+            echo "Deploy em stage (ECR) finalizado com sucesso!!"

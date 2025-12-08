@@ -25,7 +25,7 @@ export class FileTypeValidator implements ValidatorConstraintInterface {
       const subType = parts[1];
       if (subType.includes('document')) return 'docx';
       if (subType.includes('sheet')) return 'xlsx';
-      return subType;
+      return subType as string;
     });
     return `Tipo de arquivo inválido. Tipos permitidos: ${allowedExtensions.join(', ')}.`;
   }

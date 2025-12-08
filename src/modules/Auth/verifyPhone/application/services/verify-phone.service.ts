@@ -56,7 +56,6 @@ export class VerifyPhoneService {
     const verifyPhoneToken =
       await this.VerifyPhoneRepository.createTokenVerifyPhone(newVerifyPhoneToken);
 
-
     await this.LoggerAdapter.log({
       message: `Verify phone token created for user ${userId} and phone number ${VerifyPhoneRequest.phone}: ${generateToken}`,
       where: 'VerifyPhoneService.execute',

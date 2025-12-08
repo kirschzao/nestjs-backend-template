@@ -34,7 +34,6 @@ export class PrismaAccountRepository implements AccountRepository {
     return accounts.map((account) => AccountMapper.toDomain(account));
   }
 
-
   public async updateAccountTier(accountId: string, tier: AccountTier): Promise<void> {
     await this.prisma.account.update({
       where: { id: accountId },
@@ -61,8 +60,6 @@ export class PrismaAccountRepository implements AccountRepository {
     });
     return accounts.map((account) => AccountMapper.toDomain(account));
   }
-
-  
 
   public async deleteAccount(id: string): Promise<boolean> {
     await this.prisma.account.delete({

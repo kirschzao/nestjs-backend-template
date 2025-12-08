@@ -9,4 +9,3 @@ export abstract class AccountRepository {
   public abstract updateAccountStatus(accountId: string, status: AccountStatus): Promise<void>;
   public abstract deleteAccount(id: string): Promise<boolean>;
 }
-

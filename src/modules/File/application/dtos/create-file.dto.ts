@@ -3,10 +3,7 @@ import { IsString, IsNumber, IsNotEmpty, Validate, IsOptional } from 'class-vali
 import { FileTypeValidator } from '@/modules/File/application/dtos/file.type.validator';
 import { Transform } from 'class-transformer';
 
-
-export function ConvertToCreateFileDTO(
-  files: Express.Multer.File,
-): CreateFileDTO {
+export function ConvertToCreateFileDTO(files: Express.Multer.File): CreateFileDTO {
   const createFileDto = new CreateFileDTO();
   createFileDto.file = files;
   createFileDto.name = files.originalname;

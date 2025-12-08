@@ -90,9 +90,7 @@ async function bootstrap() {
   await app.listen(process.env.PORT ?? 3000);
 
   console.info(`Server is running on http://localhost:${process.env.PORT ?? 3000}`);
-  console.info(
-    `Scalar(OpenAPI) is running on http://localhost:${process.env.PORT || 3000}/docs`,
-  );
+  console.info(`Scalar(OpenAPI) is running on http://localhost:${process.env.PORT || 3000}/docs`);
   console.info(`Prisma Studio is running on http://localhost:${process.env.PORT || 5555}`);
 
   console.info('CORS liberado para:', getCors());

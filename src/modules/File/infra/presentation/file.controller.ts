@@ -54,7 +54,6 @@ export class FileController {
     return await Promise.all(creationPromises);
   }
 
-
   @GetFileByIdDecorator
   @Get(':id')
   async getFileById(@Param('id') id: string, @GetUser() user) {

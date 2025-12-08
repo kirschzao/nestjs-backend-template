@@ -48,4 +48,3 @@ export class File implements FileInterface {
     };
   }
 }
-

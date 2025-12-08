@@ -17,7 +17,6 @@ export class PrismaFileRepository implements FileRepository {
     return FileMapper.toDomain(createdFile);
   }
 
-
   public async getFileById(id: string): Promise<File | null> {
     const file = await this.prisma.file.findUnique({
       where: { id },

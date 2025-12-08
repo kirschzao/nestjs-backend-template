@@ -14,6 +14,6 @@ import { BullModule } from '@nestjs/bullmq';
     }),
   ],
   providers: [],
-  exports: [BullModule,],
+  exports: [BullModule],
 })
 export class QueueModule {}

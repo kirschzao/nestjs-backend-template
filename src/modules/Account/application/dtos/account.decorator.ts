@@ -58,9 +58,6 @@ export const GetAccountDecorator = applyDecorators(
   }),
 );
 
-
-
-
 export const DeleteAccountDecorator = applyDecorators(
   ApiOperation({
     summary: 'Delete account by ID',

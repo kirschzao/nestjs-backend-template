@@ -69,4 +69,4 @@ import { PrismaVerifyPhoneRepository } from '@/modules/Auth/verifyPhone/infra/pe
     PrismaService,
   ],
 })
-export class DatabaseModule{}
+export class DatabaseModule {}

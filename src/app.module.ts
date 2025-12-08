@@ -18,7 +18,6 @@ import { LoggerInterceptor } from '@/infrastructure/Logger/services/logger.inter
 import { AccountModule } from '@/modules/Account/account.module';
 import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({

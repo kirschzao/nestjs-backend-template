@@ -5,8 +5,7 @@ export type ExceptionInternalCode =
   | FileExceptions
   | MessageExceptions
   | SendEmailExceptions
-  | StorageExceptions
-
+  | StorageExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',

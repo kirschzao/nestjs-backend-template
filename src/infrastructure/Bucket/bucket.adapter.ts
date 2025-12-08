@@ -1,4 +1,3 @@
-
 export abstract class BucketAdapter {
   abstract uploadFile(file: Express.Multer.File, fileKey: string): Promise<string | undefined>;
   abstract deleteFile(fileKey: string): Promise<void>;

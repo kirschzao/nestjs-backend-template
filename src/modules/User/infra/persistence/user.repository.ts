@@ -8,7 +8,6 @@ import { RoleEnum } from '@/modules/User/domain/user.entity';
 import { LoggerAdapter } from '@/infrastructure/Logger/logger.adapter';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 
-
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
   constructor(
@@ -54,7 +53,6 @@ export class PrismaUserRepository implements UserRepository {
       });
     }
   }
-
 
   public async getUser(id: string): Promise<User | null> {
     const user = await this.prisma.user.findUnique({

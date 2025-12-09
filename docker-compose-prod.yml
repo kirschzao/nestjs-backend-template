@@ -1,7 +1,7 @@
 services:
   api:
     image: MUDAR_PARA_O_ECR:${IMAGE_TAG}
-    container_name: oryzalabs-api
+    container_name: kirschzao-template-api
     restart: unless-stopped
     env_file:
       - .env.prod

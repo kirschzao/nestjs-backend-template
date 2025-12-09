@@ -1,4 +1,4 @@
-# Template Oryza Backend
+# Template de Aplicações Backend do Bernardo Kirsch
 
 ## Description
 
@@ -44,4 +44,4 @@ $ npm run dev
 
 ## License
 
-- Licensed by OryzaLabs
+- Licensed by kirschzao

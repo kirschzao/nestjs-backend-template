@@ -1,12 +1,12 @@
 services:
   api:
     image: MUDAR_PARA_O_ECR:${IMAGE_TAG} # <-- ATUALIZE AQUI
-    container_name: oryzalabs-api
+    container_name: kirschzao-template-api
     restart: unless-stopped
     env_file:
       - .env.stage
     networks:
-      - oryzalabs-network
+      - template-network
     command: sh -c "npx prisma migrate deploy && npm run start:prod"
     depends_on:
       - redis
@@ -17,13 +17,13 @@ services:
     env_file:
       - .env.stage
     networks:
-      - oryzalabs-network
+      - template-network
     volumes:
       - redis-data:/data
 
   nginx:
     image: nginx:latest
-    container_name: oryzalabs-nginx
+    container_name: template-nginx
     restart: unless-stopped
     ports:
       - '80:80'
@@ -35,10 +35,10 @@ services:
     depends_on:
       - api
     networks:
-      - oryzalabs-network
+      - template-network
 
 networks:
-  oryzalabs-network:
+  template-network:
     driver: bridge
 
 volumes:

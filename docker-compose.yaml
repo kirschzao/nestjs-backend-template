@@ -1,11 +1,11 @@
 services:
   postgres:
     image: postgres:15
-    container_name: oryzalabs-db
+    container_name: template-db
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
-      POSTGRES_DB: oryzalabs-db
+      POSTGRES_DB: template-db
     ports:
       - '5432:5432'
     volumes:

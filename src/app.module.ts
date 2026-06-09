@@ -23,6 +23,7 @@ import { AuditModule } from '@/infrastructure/Audit/audit.module';
 import { SNSModule } from '@/infrastructure/SNS/sns.module';
 import { SecretsModule } from '@/infrastructure/Secrets/secrets.module';
 import { CloudWatchModule } from '@/infrastructure/CloudWatch/cloud-watch.module';
+import { LambdaModule } from '@/infrastructure/Lambda/lambda.module';
 import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
@@ -56,6 +57,7 @@ import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.inter
     SNSModule,
     SecretsModule,
     CloudWatchModule,
+    LambdaModule,
   ],
   controllers: [],
   providers: [

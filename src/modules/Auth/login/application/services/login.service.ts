@@ -60,6 +60,8 @@ export class LoginService {
       });
     }
 
+    await this.refreshTokenRepository.revokeAllRefreshTokensByAccountId(account.id);
+
     return {
       ...(await this.generateNewTokens({
         accountId: account.id,

@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { timingSafeEqual } from 'crypto';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { UserRepository } from '@/modules/User/domain/user.repository';
 import { VerifyPhoneRepository } from '@/modules/Auth/verifyPhone/domain/verify-phone-repository';
@@ -86,7 +87,12 @@ export class ValidateVerifyPhoneService {
       });
     }
 
-    if (verifyPhoneToken.token !== validateVerifyPhoneDTO.token) {
+    const isTokenMatch = timingSafeEqual(
+      Buffer.from(verifyPhoneToken.token),
+      Buffer.from(validateVerifyPhoneDTO.token.padEnd(verifyPhoneToken.token.length)),
+    );
+
+    if (!isTokenMatch) {
       const attempts = await this.VerifyPhoneRepository.incrementAttempts(verifyPhoneToken.id);
 
       if (attempts >= 3) {

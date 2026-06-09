@@ -10,7 +10,13 @@ export class GetAccountByIdService {
     private readonly ExceptionsAdapter: ExceptionsAdapter,
   ) {}
 
-  async execute(accountId: string): Promise<Account> {
+  async execute(accountId: string, authenticatedUserId: string): Promise<Account> {
+    if (accountId !== authenticatedUserId) {
+      throw this.ExceptionsAdapter.forbidden({
+        message: 'You can only access your own account',
+      });
+    }
+
     const findAccount = await this.AccountRepository.getAccountById(accountId);
 
     if (!findAccount) {

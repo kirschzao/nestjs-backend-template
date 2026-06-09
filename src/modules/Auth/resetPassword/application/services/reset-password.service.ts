@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { timingSafeEqual } from 'crypto';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { UserRepository } from '@/modules/User/domain/user.repository';
 import { User } from '@/modules/User/domain/user.entity';
@@ -45,7 +46,12 @@ export class ResetPasswordService {
       });
     }
 
-    if (findToken.token !== ResetPasswordDTO.token) {
+    const isTokenMatch = timingSafeEqual(
+      Buffer.from(findToken.token),
+      Buffer.from(ResetPasswordDTO.token.padEnd(findToken.token.length)),
+    );
+
+    if (!isTokenMatch) {
       const attempts = await this.ResetPasswordTokenRepository.incrementAttempts(findToken.id);
 
       if (attempts >= 3) {

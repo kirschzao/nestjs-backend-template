@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { timingSafeEqual } from 'crypto';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { ValidateSignupDTO } from '@/modules/Auth/signup/application/dtos/validate.dto';
 import { UserRepository } from '@/modules/User/domain/user.repository';
@@ -42,7 +43,12 @@ export class ValidateSignupService {
       });
     }
 
-    if (findToken2Fa.token !== validateSignupDTO.token) {
+    const isTokenMatch = timingSafeEqual(
+      Buffer.from(findToken2Fa.token),
+      Buffer.from(validateSignupDTO.token.padEnd(findToken2Fa.token.length)),
+    );
+
+    if (!isTokenMatch) {
       const attempts = await this.Token2FARepository.incrementAttempts(findToken2Fa.id);
 
       if (attempts >= 3) {

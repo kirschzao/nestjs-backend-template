@@ -18,7 +18,7 @@ export class SignupService {
     private readonly SendEmailAdapter: SendEmailAdapter,
   ) {}
 
-  async execute(signupRequest: SignupRequestDTO): Promise<Token2Fa> {
+  async execute(signupRequest: SignupRequestDTO): Promise<{ id: string; expiresAt: Date }> {
     const findUserEmail = await this.UserRepository.findUserByEmail(signupRequest.email);
     if (findUserEmail) {
       throw this.ExceptionsAdapter.badRequest({
@@ -60,7 +60,7 @@ export class SignupService {
       signupRequest.name,
     );
 
-    return token;
+    return { id: token.id, expiresAt: token.expiresAt };
   }
 
   private isSafetyPassword(password: string): boolean {

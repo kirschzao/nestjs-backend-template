@@ -38,7 +38,7 @@ export class PrismaUserRepository implements UserRepository {
       if (createdUser) {
         this.LoggerAdapter.log({
           where: 'UserRepository.CreateUser',
-          message: `New user in database: ${JSON.stringify(createdUser)}`,
+          message: `New user in database: ${createdUser.id} | ${createdUser.email}`,
         });
 
         return UserMapper.toDomain(createdUser);

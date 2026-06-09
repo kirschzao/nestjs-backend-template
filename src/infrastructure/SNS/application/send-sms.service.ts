@@ -25,6 +25,10 @@ export class SendSmsService extends SNSHelperIntegration {
 
     try {
       await this.snsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'SendSmsService',
+        message: `SMS sent to ${params.phoneNumber}`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'SendSmsService',

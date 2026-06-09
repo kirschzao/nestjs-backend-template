@@ -26,6 +26,10 @@ export class SubscribeTopicService extends SNSHelperIntegration {
 
     try {
       const result = await this.snsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'SubscribeTopicService',
+        message: `Subscribed to topic ${params.topicArn} via ${params.protocol} | ARN: ${result.SubscriptionArn}`,
+      });
       return result.SubscriptionArn;
     } catch (error) {
       this.LoggerAdapter.error({

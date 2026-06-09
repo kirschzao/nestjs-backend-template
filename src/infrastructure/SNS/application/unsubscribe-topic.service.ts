@@ -21,6 +21,10 @@ export class UnsubscribeTopicService extends SNSHelperIntegration {
 
     try {
       await this.snsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'UnsubscribeTopicService',
+        message: `Unsubscribed: ${subscriptionArn}`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'UnsubscribeTopicService',

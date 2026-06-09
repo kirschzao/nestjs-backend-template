@@ -38,6 +38,10 @@ export class PublishToTopicService extends SNSHelperIntegration {
 
     try {
       const result = await this.snsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'PublishToTopicService',
+        message: `Message published to topic ${params.topicArn} | MessageId: ${result.MessageId}`,
+      });
       return result.MessageId;
     } catch (error) {
       this.LoggerAdapter.error({

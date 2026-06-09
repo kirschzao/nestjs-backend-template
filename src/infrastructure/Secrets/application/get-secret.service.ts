@@ -21,6 +21,10 @@ export class GetSecretService extends SecretsHelperIntegration {
 
     try {
       const result = await this.secretsClient.send(command);
+      this.LoggerAdapter.verbose({
+        where: 'GetSecretService',
+        message: `Secret fetched: ${secretId}`,
+      });
       return result.SecretString;
     } catch (error) {
       this.LoggerAdapter.error({

@@ -26,6 +26,10 @@ export class InvokeLambdaAsyncService extends LambdaHelperIntegration {
 
     try {
       await this.lambdaClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'InvokeLambdaAsyncService',
+        message: `Lambda invoked async: ${params.functionName}`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'InvokeLambdaAsyncService',

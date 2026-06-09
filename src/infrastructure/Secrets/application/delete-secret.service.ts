@@ -24,6 +24,10 @@ export class DeleteSecretService extends SecretsHelperIntegration {
 
     try {
       await this.secretsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'DeleteSecretService',
+        message: `Secret deleted: ${secretId}`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'DeleteSecretService',

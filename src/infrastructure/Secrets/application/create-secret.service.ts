@@ -26,6 +26,10 @@ export class CreateSecretService extends SecretsHelperIntegration {
 
     try {
       const result = await this.secretsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'CreateSecretService',
+        message: `Secret created: ${params.name} | ARN: ${result.ARN}`,
+      });
       return result.ARN;
     } catch (error) {
       this.LoggerAdapter.error({

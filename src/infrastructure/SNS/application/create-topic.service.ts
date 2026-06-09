@@ -22,6 +22,10 @@ export class CreateTopicService extends SNSHelperIntegration {
 
     try {
       const result = await this.snsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'CreateTopicService',
+        message: `Topic created: ${params.name} | ARN: ${result.TopicArn}`,
+      });
       return result.TopicArn;
     } catch (error) {
       this.LoggerAdapter.error({

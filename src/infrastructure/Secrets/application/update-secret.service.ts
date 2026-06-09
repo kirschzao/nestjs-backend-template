@@ -25,6 +25,10 @@ export class UpdateSecretService extends SecretsHelperIntegration {
 
     try {
       await this.secretsClient.send(command);
+      this.LoggerAdapter.log({
+        where: 'UpdateSecretService',
+        message: `Secret updated: ${params.secretId}`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'UpdateSecretService',

@@ -37,6 +37,11 @@ export class InvokeLambdaService extends LambdaHelperIntegration {
         }
       }
 
+      this.LoggerAdapter.log({
+        where: 'InvokeLambdaService',
+        message: `Lambda invoked: ${params.functionName} | Status: ${result.StatusCode}`,
+      });
+
       return {
         statusCode: result.StatusCode ?? 200,
         payload,

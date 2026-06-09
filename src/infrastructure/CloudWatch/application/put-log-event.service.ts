@@ -25,6 +25,10 @@ export class PutLogEventService extends CloudWatchHelperIntegration {
 
     try {
       await this.cloudWatchClient.send(command);
+      this.LoggerAdapter.verbose({
+        where: 'PutLogEventService',
+        message: `Logs sent to CloudWatch: ${logGroupName}/${logStreamName} | ${events.length} events`,
+      });
     } catch (error) {
       this.LoggerAdapter.error({
         where: 'PutLogEventService',

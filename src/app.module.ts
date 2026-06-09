@@ -24,6 +24,7 @@ import { SNSModule } from '@/infrastructure/SNS/sns.module';
 import { SecretsModule } from '@/infrastructure/Secrets/secrets.module';
 import { CloudWatchModule } from '@/infrastructure/CloudWatch/cloud-watch.module';
 import { LambdaModule } from '@/infrastructure/Lambda/lambda.module';
+import { UserGraphQLModule } from '@/modules/UserGraphQL/user-graphql.module';
 import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
@@ -58,6 +59,7 @@ import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.inter
     SecretsModule,
     CloudWatchModule,
     LambdaModule,
+    UserGraphQLModule,
   ],
   controllers: [],
   providers: [

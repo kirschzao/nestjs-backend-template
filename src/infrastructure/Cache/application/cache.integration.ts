@@ -83,6 +83,11 @@ export class CacheIntegration implements CacheAdapter, OnModuleDestroy {
     await this.redis.flushdb();
   }
 
+  async ping(): Promise<boolean> {
+    const result = await this.redis.ping();
+    return result === 'PONG';
+  }
+
   async onModuleDestroy(): Promise<void> {
     await this.redis.quit();
   }

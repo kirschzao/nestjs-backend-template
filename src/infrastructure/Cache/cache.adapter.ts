@@ -8,4 +8,5 @@ export abstract class CacheAdapter {
   abstract delMany(keys: string[]): Promise<void>;
   abstract has(key: string): Promise<boolean>;
   abstract flush(): Promise<void>;
+  abstract ping(): Promise<boolean>;
 }

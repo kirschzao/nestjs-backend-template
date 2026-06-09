@@ -11,6 +11,7 @@ export class VerifyPhoneMapper {
         createdAt: prismaToken.createdAt,
         expiresAt: prismaToken.expiresAt,
         isRevoked: prismaToken.isRevoked,
+        attempts: prismaToken.attempts,
       },
       prismaToken.id,
     );
@@ -27,6 +28,7 @@ export class VerifyPhoneMapper {
       createdAt: verifyPhoneToken.createdAt,
       expiresAt: verifyPhoneToken.expiresAt,
       isRevoked: verifyPhoneToken.isRevoked,
+      attempts: verifyPhoneToken.attempts,
     };
   }
 }

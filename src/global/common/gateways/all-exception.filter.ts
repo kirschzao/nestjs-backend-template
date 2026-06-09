@@ -23,7 +23,6 @@ export class AllExceptionsFilter {
       errorResponse = {
         name: exception.name,
         message: 'Internal server error on WebSocket',
-        stack: exception.stack,
       };
     } else {
       errorResponse = {

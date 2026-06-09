@@ -6,4 +6,5 @@ export abstract class VerifyPhoneRepository {
   ): Promise<VerifyPhoneToken>;
   public abstract findValidTokenVerifyPhone(id: string): Promise<VerifyPhoneToken | null>;
   public abstract revokeTokenById(id: string): Promise<boolean>;
+  public abstract incrementAttempts(id: string): Promise<number>;
 }

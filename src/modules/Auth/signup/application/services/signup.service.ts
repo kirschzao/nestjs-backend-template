@@ -18,7 +18,7 @@ export class SignupService {
     private readonly SendEmailAdapter: SendEmailAdapter,
   ) {}
 
-  async execute(signupRequest: SignupRequestDTO): Promise<Token2Fa> {
+  async execute(signupRequest: SignupRequestDTO): Promise<{ id: string; expiresAt: Date }> {
     const findUserEmail = await this.UserRepository.findUserByEmail(signupRequest.email);
     if (findUserEmail) {
       throw this.ExceptionsAdapter.badRequest({
@@ -39,9 +39,9 @@ export class SignupService {
       hashSalt: 8,
     });
 
-    const generateToken2Fa = Math.floor(Math.random() * 10000)
+    const generateToken2Fa = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
     const newToken2Fa = new Token2Fa(
       {
         token: generateToken2Fa,
@@ -60,7 +60,7 @@ export class SignupService {
       signupRequest.name,
     );
 
-    return token;
+    return { id: token.id, expiresAt: token.expiresAt };
   }
 
   private isSafetyPassword(password: string): boolean {

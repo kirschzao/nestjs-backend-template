@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { timingSafeEqual } from 'crypto';
 import { ExceptionsAdapter } from '@/infrastructure/Exceptions/exceptions.adapter';
 import { ValidateResetPasswordDTO } from '@/modules/Auth/resetPassword/application/dtos/validate.dto';
 import { UserRepository } from '@/modules/User/domain/user.repository';
@@ -40,7 +41,22 @@ export class IsValidateResetPasswordService {
       });
     }
 
-    if (findToken.token !== ValidateResetPasswordDTO.token) {
+    const isTokenMatch = timingSafeEqual(
+      Buffer.from(findToken.token),
+      Buffer.from(ValidateResetPasswordDTO.token.padEnd(findToken.token.length)),
+    );
+
+    if (!isTokenMatch) {
+      const attempts = await this.ResetPasswordTokenRepository.incrementAttempts(findToken.id);
+
+      if (attempts >= 3) {
+        await this.ResetPasswordTokenRepository.revokeResetPasswordTokenById(findToken.id);
+        throw this.ExceptionsAdapter.badRequest({
+          message: 'Too many failed attempts. This token has been invalidated',
+          internalKey: TokenExceptions.TOKEN_INVALID,
+        });
+      }
+
       throw this.ExceptionsAdapter.badRequest({
         message: 'Invalid token',
         internalKey: TokenExceptions.TOKEN_INVALID,

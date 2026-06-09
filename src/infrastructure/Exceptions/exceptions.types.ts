@@ -5,7 +5,12 @@ export type ExceptionInternalCode =
   | FileExceptions
   | MessageExceptions
   | SendEmailExceptions
-  | StorageExceptions;
+  | StorageExceptions
+  | CacheExceptions
+  | SNSExceptions
+  | SecretsExceptions
+  | CloudWatchExceptions
+  | LambdaExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
@@ -50,4 +55,32 @@ export enum StorageExceptions {
   STORAGE_URL_NOT_PROVIDED = 'STORAGE_URL_NOT_PROVIDED',
   STORAGE_KEY_NOT_PROVIDED = 'STORAGE_KEY_NOT_PROVIDED',
   STORAGE_UPLOAD_FAILED = 'STORAGE_UPLOAD_FAILED',
+}
+
+export enum CacheExceptions {
+  CACHE_CONNECTION_FAILED = 'CACHE_CONNECTION_FAILED',
+  CACHE_OPERATION_FAILED = 'CACHE_OPERATION_FAILED',
+}
+
+export enum LambdaExceptions {
+  LAMBDA_INVOKE_FAILED = 'LAMBDA_INVOKE_FAILED',
+}
+
+export enum CloudWatchExceptions {
+  CLOUDWATCH_LOG_FAILED = 'CLOUDWATCH_LOG_FAILED',
+}
+
+export enum SecretsExceptions {
+  SECRET_NOT_FOUND = 'SECRET_NOT_FOUND',
+  SECRET_CREATE_FAILED = 'SECRET_CREATE_FAILED',
+  SECRET_UPDATE_FAILED = 'SECRET_UPDATE_FAILED',
+  SECRET_DELETE_FAILED = 'SECRET_DELETE_FAILED',
+}
+
+export enum SNSExceptions {
+  SNS_SMS_FAILED = 'SNS_SMS_FAILED',
+  SNS_PUBLISH_FAILED = 'SNS_PUBLISH_FAILED',
+  SNS_TOPIC_FAILED = 'SNS_TOPIC_FAILED',
+  SNS_SUBSCRIBE_FAILED = 'SNS_SUBSCRIBE_FAILED',
+  SNS_UNSUBSCRIBE_FAILED = 'SNS_UNSUBSCRIBE_FAILED',
 }

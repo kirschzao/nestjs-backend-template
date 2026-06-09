@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as cookieParser from 'cookie-parser';
 import * as express from 'express';
+import helmet from 'helmet';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { SocketIoAdapter } from '@/global/socket.adapter';
@@ -13,9 +14,11 @@ async function bootstrap() {
 
   app.set('trust proxy', true);
 
+  app.use(helmet());
+
   app.use(
     express.json({
-      limit: '150mb',
+      limit: '50mb',
       verify: (req: express.Request & { rawBody: Buffer }, _res, buf) => {
         req.rawBody = buf;
       },

@@ -15,7 +15,7 @@ export class RequestResetPasswordService {
     private readonly SendEmailAdapter: SendEmailAdapter,
   ) {}
 
-  async execute(ResetPasswordRequestDTO: ResetPasswordRequestDTO): Promise<ResetPasswordToken> {
+  async execute(ResetPasswordRequestDTO: ResetPasswordRequestDTO): Promise<{ id: string; expiresAt: Date }> {
     const user = await this.UserRepository.findUserByEmail(ResetPasswordRequestDTO.email);
     if (!user) {
       throw this.ExceptionsAdapter.notFound({
@@ -24,9 +24,9 @@ export class RequestResetPasswordService {
       });
     }
 
-    const generatedTokenResetPassword = Math.floor(Math.random() * 10000)
+    const generatedTokenResetPassword = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
 
     const ResetToken = new ResetPasswordToken({
       userId: user.id,
@@ -36,7 +36,7 @@ export class RequestResetPasswordService {
       isRevoked: false,
     });
 
-    const CreatedResetToken =
+    const createdResetToken =
       await this.ResetPasswordTokenRepository.createResetPasswordToken(ResetToken);
 
     await this.SendEmailAdapter.sendEmailResetPassword(
@@ -45,6 +45,6 @@ export class RequestResetPasswordService {
       user.name,
     );
 
-    return CreatedResetToken;
+    return { id: createdResetToken.id, expiresAt: createdResetToken.expiresAt };
   }
 }

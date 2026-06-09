@@ -17,6 +17,15 @@ import { LoggerModule } from '@/infrastructure/Logger/logger.module';
 import { LoggerInterceptor } from '@/infrastructure/Logger/services/logger.interceptor';
 import { AccountModule } from '@/modules/Account/account.module';
 import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
+import { CacheModule } from '@/infrastructure/Cache/cache.module';
+import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.module';
+import { AuditModule } from '@/infrastructure/Audit/audit.module';
+import { SNSModule } from '@/infrastructure/SNS/sns.module';
+import { SecretsModule } from '@/infrastructure/Secrets/secrets.module';
+import { CloudWatchModule } from '@/infrastructure/CloudWatch/cloud-watch.module';
+import { LambdaModule } from '@/infrastructure/Lambda/lambda.module';
+import { UserGraphQLModule } from '@/modules/UserGraphQL/user-graphql.module';
+import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
   imports: [
@@ -43,6 +52,14 @@ import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
     FileModule,
     BucketModule,
     CookiesModule,
+    CacheModule,
+    HealthCheckModule,
+    AuditModule,
+    SNSModule,
+    SecretsModule,
+    CloudWatchModule,
+    LambdaModule,
+    UserGraphQLModule,
   ],
   controllers: [],
   providers: [
@@ -57,6 +74,10 @@ import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggerInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuditInterceptor,
     },
   ],
 })

@@ -18,7 +18,7 @@ export class VerifyPhoneService {
   async execute(
     userId: string,
     VerifyPhoneRequest: VerifyPhoneRequestDTO,
-  ): Promise<VerifyPhoneToken> {
+  ): Promise<{ id: string; expiresAt: Date }> {
     const user = await this.UserRepository.findUserById(userId);
     if (!user) {
       throw this.ExceptionsAdapter.notFound({
@@ -40,9 +40,9 @@ export class VerifyPhoneService {
       });
     }
 
-    const generateToken = Math.floor(Math.random() * 10000)
+    const generateToken = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
 
     const newVerifyPhoneToken = new VerifyPhoneToken({
       userId: userId,
@@ -57,10 +57,10 @@ export class VerifyPhoneService {
       await this.VerifyPhoneRepository.createTokenVerifyPhone(newVerifyPhoneToken);
 
     await this.LoggerAdapter.log({
-      message: `Verify phone token created for user ${userId} and phone number ${VerifyPhoneRequest.phone}: ${generateToken}`,
+      message: `Verify phone token created for user ${userId} and phone number ${VerifyPhoneRequest.phone}`,
       where: 'VerifyPhoneService.execute',
     });
 
-    return verifyPhoneToken;
+    return { id: verifyPhoneToken.id, expiresAt: verifyPhoneToken.expiresAt };
   }
 }

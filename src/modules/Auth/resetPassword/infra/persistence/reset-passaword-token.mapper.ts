@@ -9,6 +9,7 @@ export class ResetPasswordTokenMapper {
         createdAt: PrismaToken.createdAt,
         expiresAt: PrismaToken.expiresAt,
         isRevoked: PrismaToken.isRevoked,
+        attempts: PrismaToken.attempts,
         userId: PrismaToken.accountId,
       },
       PrismaToken.id,
@@ -23,6 +24,7 @@ export class ResetPasswordTokenMapper {
       createdAt: ResetPasswordToken.createdAt,
       expiresAt: ResetPasswordToken.expiresAt,
       isRevoked: ResetPasswordToken.isRevoked,
+      attempts: ResetPasswordToken.attempts,
       accountId: ResetPasswordToken.userId,
     };
   }

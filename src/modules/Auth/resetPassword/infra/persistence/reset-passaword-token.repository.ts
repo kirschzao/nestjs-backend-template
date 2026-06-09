@@ -49,4 +49,12 @@ export class PrismaResetPasswordTokenRepository implements ResetPasswordTokenRep
 
     return result.count > 0;
   }
+
+  public async incrementAttempts(id: string): Promise<number> {
+    const updated = await this.PrismaService.resetPasswordToken.update({
+      where: { id },
+      data: { attempts: { increment: 1 } },
+    });
+    return updated.attempts;
+  }
 }

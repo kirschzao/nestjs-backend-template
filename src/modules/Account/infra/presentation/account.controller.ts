@@ -24,8 +24,8 @@ export class AccountController {
 
   @GetAccountDecorator
   @Get(':id')
-  async getAccountById(@Param('id') id: string) {
-    return await this.GetAccount.execute(id);
+  async getAccountById(@Param('id') id: string, @GetUser() user) {
+    return await this.GetAccount.execute(id, String(user.id));
   }
 
   @GetAllAccountsDecorator

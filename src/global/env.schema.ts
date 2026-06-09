@@ -21,6 +21,9 @@ export const envSchema = z.object({
   SES_SENDER_EMAIL: z.string().min(1),
   SES_SENDER_NAME: z.string().min(1),
   CORS: z.string().min(1),
+  SNS_ACCESS_KEY_ID: z.string().min(1),
+  SNS_SECRET_ACCESS_KEY: z.string().min(1),
+  SNS_REGION: z.string().min(1),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -6,7 +6,8 @@ export type ExceptionInternalCode =
   | MessageExceptions
   | SendEmailExceptions
   | StorageExceptions
-  | CacheExceptions;
+  | CacheExceptions
+  | SNSExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
@@ -56,4 +57,12 @@ export enum StorageExceptions {
 export enum CacheExceptions {
   CACHE_CONNECTION_FAILED = 'CACHE_CONNECTION_FAILED',
   CACHE_OPERATION_FAILED = 'CACHE_OPERATION_FAILED',
+}
+
+export enum SNSExceptions {
+  SNS_SMS_FAILED = 'SNS_SMS_FAILED',
+  SNS_PUBLISH_FAILED = 'SNS_PUBLISH_FAILED',
+  SNS_TOPIC_FAILED = 'SNS_TOPIC_FAILED',
+  SNS_SUBSCRIBE_FAILED = 'SNS_SUBSCRIBE_FAILED',
+  SNS_UNSUBSCRIBE_FAILED = 'SNS_UNSUBSCRIBE_FAILED',
 }

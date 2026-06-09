@@ -20,6 +20,7 @@ import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
 import { CacheModule } from '@/infrastructure/Cache/cache.module';
 import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.module';
 import { AuditModule } from '@/infrastructure/Audit/audit.module';
+import { SNSModule } from '@/infrastructure/SNS/sns.module';
 import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
@@ -50,6 +51,7 @@ import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.inter
     CacheModule,
     HealthCheckModule,
     AuditModule,
+    SNSModule,
   ],
   controllers: [],
   providers: [

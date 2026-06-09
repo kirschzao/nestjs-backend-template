@@ -1,4 +1,4 @@
-# Template de Aplicações Backend do Bernardo Kirsch
+# Template de Aplicações Backend do Bernardo P. Kirsch
 
 ## Description
 

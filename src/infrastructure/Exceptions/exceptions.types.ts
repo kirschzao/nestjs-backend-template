@@ -5,7 +5,8 @@ export type ExceptionInternalCode =
   | FileExceptions
   | MessageExceptions
   | SendEmailExceptions
-  | StorageExceptions;
+  | StorageExceptions
+  | CacheExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
@@ -50,4 +51,9 @@ export enum StorageExceptions {
   STORAGE_URL_NOT_PROVIDED = 'STORAGE_URL_NOT_PROVIDED',
   STORAGE_KEY_NOT_PROVIDED = 'STORAGE_KEY_NOT_PROVIDED',
   STORAGE_UPLOAD_FAILED = 'STORAGE_UPLOAD_FAILED',
+}
+
+export enum CacheExceptions {
+  CACHE_CONNECTION_FAILED = 'CACHE_CONNECTION_FAILED',
+  CACHE_OPERATION_FAILED = 'CACHE_OPERATION_FAILED',
 }

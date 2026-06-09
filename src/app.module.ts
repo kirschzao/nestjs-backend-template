@@ -17,6 +17,7 @@ import { LoggerModule } from '@/infrastructure/Logger/logger.module';
 import { LoggerInterceptor } from '@/infrastructure/Logger/services/logger.interceptor';
 import { AccountModule } from '@/modules/Account/account.module';
 import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
+import { CacheModule } from '@/infrastructure/Cache/cache.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
     FileModule,
     BucketModule,
     CookiesModule,
+    CacheModule,
   ],
   controllers: [],
   providers: [

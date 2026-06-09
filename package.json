@@ -23,7 +23,6 @@
   },
   "author": "",
   "license": "ISC",
- 
   "dependencies": {
     "@aws-sdk/client-s3": "^3.946.0",
     "@aws-sdk/client-ses": "^3.946.0",
@@ -56,6 +55,7 @@
     "cookie-parser": "^1.4.7",
     "cpf-cnpj-validator": "^1.0.3",
     "dotenv": "^17.2.3",
+    "ioredis": "^5.11.1",
     "multer": "^2.0.2",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

@@ -8,7 +8,8 @@ export type ExceptionInternalCode =
   | StorageExceptions
   | CacheExceptions
   | SNSExceptions
-  | SecretsExceptions;
+  | SecretsExceptions
+  | CloudWatchExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
@@ -58,6 +59,10 @@ export enum StorageExceptions {
 export enum CacheExceptions {
   CACHE_CONNECTION_FAILED = 'CACHE_CONNECTION_FAILED',
   CACHE_OPERATION_FAILED = 'CACHE_OPERATION_FAILED',
+}
+
+export enum CloudWatchExceptions {
+  CLOUDWATCH_LOG_FAILED = 'CLOUDWATCH_LOG_FAILED',
 }
 
 export enum SecretsExceptions {

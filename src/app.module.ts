@@ -22,6 +22,7 @@ import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.mod
 import { AuditModule } from '@/infrastructure/Audit/audit.module';
 import { SNSModule } from '@/infrastructure/SNS/sns.module';
 import { SecretsModule } from '@/infrastructure/Secrets/secrets.module';
+import { CloudWatchModule } from '@/infrastructure/CloudWatch/cloud-watch.module';
 import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
@@ -54,6 +55,7 @@ import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.inter
     AuditModule,
     SNSModule,
     SecretsModule,
+    CloudWatchModule,
   ],
   controllers: [],
   providers: [

@@ -19,6 +19,8 @@ import { AccountModule } from '@/modules/Account/account.module';
 import { CookiesModule } from '@/infrastructure/Cookies/cookies.module';
 import { CacheModule } from '@/infrastructure/Cache/cache.module';
 import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.module';
+import { AuditModule } from '@/infrastructure/Audit/audit.module';
+import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
   imports: [
@@ -47,6 +49,7 @@ import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.mod
     CookiesModule,
     CacheModule,
     HealthCheckModule,
+    AuditModule,
   ],
   controllers: [],
   providers: [
@@ -61,6 +64,10 @@ import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.mod
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggerInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: AuditInterceptor,
     },
   ],
 })

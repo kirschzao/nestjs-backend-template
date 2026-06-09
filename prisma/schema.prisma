@@ -63,23 +63,25 @@ model RefreshToken {
 
 model Token2FA {
   id           String   @id @default(uuid())
-  token        String   
+  token        String
   expiresAt    DateTime @map("expires_at")
   createdAt    DateTime @default(now()) @map("created_at")
   isRevoked    Boolean  @default(false) @map("is_revoked")
+  attempts     Int      @default(0)
   userEmail    String   @map("user_email")
   userName     String?  @map("user_name")
   userPassword String?  @map("usage_password")
-  
+
   @@map("token2fa")
 }
 
 model ResetPasswordToken {
   id          String      @id @default(uuid())
-  token       String      
+  token       String
   expiresAt   DateTime    @map("expires_at")
   createdAt   DateTime    @default(now()) @map("created_at")
   isRevoked   Boolean     @default(false) @map("is_revoked")
+  attempts    Int         @default(0)
   accountId   String      @map("account_id")
   account     Account     @relation(fields: [accountId], references: [id], onDelete: Cascade)
 
@@ -88,11 +90,12 @@ model ResetPasswordToken {
 
 model VerifyPhoneToken {
   id        String    @id @default(uuid())
-  token     String    
+  token     String
   userId    String    @map("user_id")
   createdAt DateTime  @default(now()) @map("created_at")
   expiresAt DateTime  @map("expires_at")
   isRevoked Boolean   @default(false) @map("is_revoked")
+  attempts  Int       @default(0)
   phone     String    @map("phone")
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 

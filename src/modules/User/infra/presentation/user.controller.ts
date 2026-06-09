@@ -38,8 +38,7 @@ export class UserController {
   ) {}
 
   @CreateUserDecorator
-  //@IsAdmin()
-  @Public()
+  @IsAdmin()
   @Post()
   async createUser(@Body() user: CreateUserDTO) {
     return await this.CreateUserService.execute(user);

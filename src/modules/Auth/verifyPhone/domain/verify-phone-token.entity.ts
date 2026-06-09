@@ -7,6 +7,7 @@ export interface TokenVerifyPhoneInterface {
   createdAt: Date;
   expiresAt: Date;
   isRevoked: boolean;
+  attempts?: number;
 }
 
 export class VerifyPhoneToken {
@@ -16,6 +17,7 @@ export class VerifyPhoneToken {
   createdAt: Date;
   expiresAt: Date;
   isRevoked: boolean;
+  attempts: number;
   phone: string;
 
   constructor(tokenVerifyPhone: TokenVerifyPhoneInterface, id?: string) {
@@ -26,6 +28,7 @@ export class VerifyPhoneToken {
     this.createdAt = tokenVerifyPhone.createdAt;
     this.expiresAt = tokenVerifyPhone.expiresAt;
     this.isRevoked = tokenVerifyPhone.isRevoked;
+    this.attempts = tokenVerifyPhone.attempts ?? 0;
   }
 
   public toJSON() {

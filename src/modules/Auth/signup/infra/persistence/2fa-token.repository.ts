@@ -32,4 +32,12 @@ export class PrismaToken2FaRepository implements Token2FARepository {
     });
     return true;
   }
+
+  public async incrementAttempts(id: string): Promise<number> {
+    const updated = await this.prisma.token2FA.update({
+      where: { id },
+      data: { attempts: { increment: 1 } },
+    });
+    return updated.attempts;
+  }
 }

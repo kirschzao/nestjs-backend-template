@@ -5,6 +5,7 @@ export interface ResetPasswordTokenInterface {
   createdAt: Date;
   expiresAt: Date;
   isRevoked: boolean;
+  attempts?: number;
   userId: string;
 }
 
@@ -14,6 +15,7 @@ export class ResetPasswordToken {
   expiresAt: Date;
   createdAt: Date;
   isRevoked: boolean;
+  attempts: number;
   userId: string;
 
   constructor(resetPasswordToken: ResetPasswordTokenInterface, id?: string) {
@@ -22,6 +24,7 @@ export class ResetPasswordToken {
     this.expiresAt = resetPasswordToken.expiresAt;
     this.createdAt = resetPasswordToken.createdAt;
     this.isRevoked = resetPasswordToken.isRevoked;
+    this.attempts = resetPasswordToken.attempts ?? 0;
     this.userId = resetPasswordToken.userId;
   }
 

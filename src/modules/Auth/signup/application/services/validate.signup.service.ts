@@ -43,6 +43,16 @@ export class ValidateSignupService {
     }
 
     if (findToken2Fa.token !== validateSignupDTO.token) {
+      const attempts = await this.Token2FARepository.incrementAttempts(findToken2Fa.id);
+
+      if (attempts >= 3) {
+        await this.Token2FARepository.revokeRefreshTokenById(findToken2Fa.id);
+        throw this.ExceptionsAdapter.badRequest({
+          message: 'Too many failed attempts. This token has been invalidated',
+          internalKey: TokenExceptions.TOKEN_INVALID,
+        });
+      }
+
       throw this.ExceptionsAdapter.badRequest({
         message: 'Invalid token',
         internalKey: TokenExceptions.TOKEN_INVALID,

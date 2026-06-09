@@ -24,9 +24,9 @@ export class RequestResetPasswordService {
       });
     }
 
-    const generatedTokenResetPassword = Math.floor(Math.random() * 10000)
+    const generatedTokenResetPassword = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
 
     const ResetToken = new ResetPasswordToken({
       userId: user.id,

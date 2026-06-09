@@ -41,6 +41,16 @@ export class IsValidateResetPasswordService {
     }
 
     if (findToken.token !== ValidateResetPasswordDTO.token) {
+      const attempts = await this.ResetPasswordTokenRepository.incrementAttempts(findToken.id);
+
+      if (attempts >= 3) {
+        await this.ResetPasswordTokenRepository.revokeResetPasswordTokenById(findToken.id);
+        throw this.ExceptionsAdapter.badRequest({
+          message: 'Too many failed attempts. This token has been invalidated',
+          internalKey: TokenExceptions.TOKEN_INVALID,
+        });
+      }
+
       throw this.ExceptionsAdapter.badRequest({
         message: 'Invalid token',
         internalKey: TokenExceptions.TOKEN_INVALID,

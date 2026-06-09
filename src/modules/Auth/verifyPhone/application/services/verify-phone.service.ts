@@ -40,9 +40,9 @@ export class VerifyPhoneService {
       });
     }
 
-    const generateToken = Math.floor(Math.random() * 10000)
+    const generateToken = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
 
     const newVerifyPhoneToken = new VerifyPhoneToken({
       userId: userId,

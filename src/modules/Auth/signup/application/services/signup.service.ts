@@ -39,9 +39,9 @@ export class SignupService {
       hashSalt: 8,
     });
 
-    const generateToken2Fa = Math.floor(Math.random() * 10000)
+    const generateToken2Fa = Math.floor(Math.random() * 1000000)
       .toString()
-      .padStart(4, '0');
+      .padStart(6, '0');
     const newToken2Fa = new Token2Fa(
       {
         token: generateToken2Fa,

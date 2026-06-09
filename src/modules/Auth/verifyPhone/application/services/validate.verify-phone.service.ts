@@ -87,6 +87,15 @@ export class ValidateVerifyPhoneService {
     }
 
     if (verifyPhoneToken.token !== validateVerifyPhoneDTO.token) {
+      const attempts = await this.VerifyPhoneRepository.incrementAttempts(verifyPhoneToken.id);
+
+      if (attempts >= 3) {
+        await this.VerifyPhoneRepository.revokeTokenById(verifyPhoneToken.id);
+        throw this.ExceptionsAdapter.unauthorized({
+          message: 'Too many failed attempts. This token has been invalidated',
+        });
+      }
+
       throw this.ExceptionsAdapter.unauthorized({
         message: 'Invalid verification code',
       });

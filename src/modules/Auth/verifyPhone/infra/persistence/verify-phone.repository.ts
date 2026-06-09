@@ -35,4 +35,12 @@ export class PrismaVerifyPhoneRepository implements VerifyPhoneRepository {
     });
     return true;
   }
+
+  public async incrementAttempts(id: string): Promise<number> {
+    const updated = await this.prisma.verifyPhoneToken.update({
+      where: { id },
+      data: { attempts: { increment: 1 } },
+    });
+    return updated.attempts;
+  }
 }

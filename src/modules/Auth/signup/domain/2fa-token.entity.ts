@@ -5,6 +5,7 @@ export interface Token2FaInterface {
   createdAt: Date;
   expiresAt: Date;
   isRevoked: boolean;
+  attempts?: number;
 }
 
 export interface UserInfo2Fa {
@@ -19,6 +20,7 @@ export class Token2Fa {
   expiresAt: Date;
   createdAt: Date;
   isRevoked: boolean;
+  attempts: number;
   userInfo2Fa: UserInfo2Fa;
 
   constructor(token2FA: Token2FaInterface, userInfo2Fa: UserInfo2Fa, id?: string) {
@@ -27,6 +29,7 @@ export class Token2Fa {
     this.expiresAt = token2FA.expiresAt;
     this.createdAt = token2FA.createdAt;
     this.isRevoked = token2FA.isRevoked;
+    this.attempts = token2FA.attempts ?? 0;
     this.userInfo2Fa = userInfo2Fa;
   }
 

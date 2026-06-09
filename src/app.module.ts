@@ -21,6 +21,7 @@ import { CacheModule } from '@/infrastructure/Cache/cache.module';
 import { HealthCheckModule } from '@/infrastructure/HealthCheck/health-check.module';
 import { AuditModule } from '@/infrastructure/Audit/audit.module';
 import { SNSModule } from '@/infrastructure/SNS/sns.module';
+import { SecretsModule } from '@/infrastructure/Secrets/secrets.module';
 import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.interceptor';
 
 @Module({
@@ -52,6 +53,7 @@ import { AuditInterceptor } from '@/infrastructure/Audit/application/audit.inter
     HealthCheckModule,
     AuditModule,
     SNSModule,
+    SecretsModule,
   ],
   controllers: [],
   providers: [

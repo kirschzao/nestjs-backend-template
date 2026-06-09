@@ -24,6 +24,9 @@ export const envSchema = z.object({
   SNS_ACCESS_KEY_ID: z.string().min(1),
   SNS_SECRET_ACCESS_KEY: z.string().min(1),
   SNS_REGION: z.string().min(1),
+  SECRETS_ACCESS_KEY_ID: z.string().min(1),
+  SECRETS_SECRET_ACCESS_KEY: z.string().min(1),
+  SECRETS_REGION: z.string().min(1),
 });
 
 export type Env = z.infer<typeof envSchema>;

@@ -7,7 +7,8 @@ export type ExceptionInternalCode =
   | SendEmailExceptions
   | StorageExceptions
   | CacheExceptions
-  | SNSExceptions;
+  | SNSExceptions
+  | SecretsExceptions;
 
 export enum UserExceptions {
   USER_NOT_FOUND = 'USER_NOT_FOUND',
@@ -57,6 +58,13 @@ export enum StorageExceptions {
 export enum CacheExceptions {
   CACHE_CONNECTION_FAILED = 'CACHE_CONNECTION_FAILED',
   CACHE_OPERATION_FAILED = 'CACHE_OPERATION_FAILED',
+}
+
+export enum SecretsExceptions {
+  SECRET_NOT_FOUND = 'SECRET_NOT_FOUND',
+  SECRET_CREATE_FAILED = 'SECRET_CREATE_FAILED',
+  SECRET_UPDATE_FAILED = 'SECRET_UPDATE_FAILED',
+  SECRET_DELETE_FAILED = 'SECRET_DELETE_FAILED',
 }
 
 export enum SNSExceptions {
